@@ -4,62 +4,68 @@
 #include<vector>
 using namespace std;
 
-template<class T>
-bool productoEncontrado(T* t);
+template<class P>
+bool foundProduct(P* p);
 
-template<class Articulo>
+template<class Producto>
 class Almacen
 {
-    int posicionActual;
-    int tamano;
-    Articulo** arreglo;
-
+    int size;
+    Producto** array;
+    int current_position;
 public:
 
-    static string nombreParaEncontrar;
+    static string name_to_find;
     Almacen()
     {
-        tamano = 100;
-        arreglo = new Articulo*[tamano];
-        posicionActual = 0;
+        size = 100;
+        array = new Producto*[size];
+        current_position = 0;
     }
 
     virtual ~Almacen() {
-      delete[] arreglo;
+      delete[] array;
     }
-    void agregar(Articulo* t)
+    void add(Producto* p)
     {
-        if(posicionActual >= tamano)
+        if(current_position >= size)
         {
             cout << "no hay espacio para almacenar";
             return;
         }
-        arreglo[posicionActual++] = t;
+        array[current_position++] = p;
         return;
     }
-    void eliminar(Articulo* t)
+    void eliminar(Producto* p)
     {
 
     }
     void print()
     {
-        for(int i=0; i<posicionActual; i++)
+        for(int i=0; i<current_position; i++)
         {
-            arreglo[i]->print();
+            array[i]->print();
         }
     }
 
-    VideoJuego** encontrarPorNombre(string name)
+    VideoJuego** findByName(string name)
     {
+        // VideoJuego** found;
+        // Almacen::name_to_find = name;
+        // found = find_if(array, array+current_position, foundProduct<Producto>);
+        // name_to_find = "";
+        // if(found[0]->getName().compare(name) == 0)
+        //     return found;
+        // else
             return NULL;
     }
 };
 
-template<class T>
-string Almacen<T>::nombreParaEncontrar = "";
+template<class P>
+string Almacen<P>::name_to_find = "";
 
-template<class T>
-bool productoEncontrado(T* t)
+template<class P>
+bool foundProduct(P* p)
 {
-    return (t->getName().compare(Almacen<T>::nombreParaEncontrar) == 0);
+    return (p->getName().compare(Almacen<P>::name_to_find) == 0);
 }
